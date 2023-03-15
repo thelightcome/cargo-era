@@ -1,0 +1,10 @@
+.slide-top-enter-active,
+.slide-top-leave-active {
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.slide-top-enter,
+.slide-top-leave-to {
+  transform: translateY(50px);
+  opacity: 0;
+}

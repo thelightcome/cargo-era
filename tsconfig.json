@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    "target": "ES2018",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "lib": ["ESNext", "ESNext.AsyncIterable", "DOM"],
+    "esModuleInterop": true,
+    "allowJs": true,
+    "sourceMap": true,
+    "strict": true,
+    "noEmit": true,
+    "experimentalDecorators": true,
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["./*"],
+      "@/*": ["./*"],
+      "icons/*": ["./src/assets/icons/*"],
+      "components/*": ["./src/components/*"],
+      "directives/*": ["./src/directives/*"],
+      "services/*": ["./src/services/*"],
+      "repositories/*": ["./src/repositories/*"],
+      "types/*": ["./src/types/*"],
+      "plugins/*": ["./src/plugins"]
+    },
+    "types": [
+      "@nuxt/types",
+      "@nuxtjs/axios",
+      "@types/node",
+      "@nuxtjs/i18n",
+      "@nuxtjs/auth-next",
+      "@types/jest",
+      "@nuxtjs/sentry",
+      "@types/mocha",
+    ],
+    "typeRoots": [".", "./src/types"]
+  },
+  "exclude": ["node_modules", ".nuxt", "dist"]
+}

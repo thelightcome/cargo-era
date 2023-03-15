@@ -1,0 +1,72 @@
+@mixin sm-phone {
+  @media (min-width: #{$xs}) {
+    @content;
+  }
+}
+
+@mixin phone {
+  @media (min-width: #{$sm}) {
+    @content;
+  }
+}
+
+@mixin phone-max {
+  @media (max-width: #{$sm}) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: #{$smd}) {
+    @content;
+  }
+}
+
+@mixin wide-tablet {
+  @media (min-width: #{$slg}) {
+    @content;
+  }
+}
+
+@mixin small-laptop {
+  @media (min-width: #{$lg}) {
+    @content;
+  }
+}
+
+@mixin laptop {
+  @media (min-width: #{$xlg}) {
+    @content;
+  }
+}
+
+@mixin wide-laptop {
+  @media (min-width: #{$xxlg}) {
+    @content;
+  }
+}
+
+@mixin wide-screen {
+  @media (min-width: #{$xxxlg}) {
+    @content;
+  }
+}
+
+@mixin style-scroll {
+  &::-webkit-scrollbar {
+    width: 3px;
+  }
+
+  &::-webkit-scrollbar-track {
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    opacity: 0.1;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    background: rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+  }
+}

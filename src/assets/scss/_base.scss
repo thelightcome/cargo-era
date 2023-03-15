@@ -1,0 +1,56 @@
+body {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+.layout {
+  width: 100%;
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding-top: $header-height;
+  padding-bottom: $footer-height;
+  box-sizing: border-box;
+
+  @include style-scroll;
+
+  @include tablet {
+    padding-bottom: 0;
+  }
+}
+
+.page {
+  width: 100%;
+  padding-top: 1rem;
+  padding-bottom: 2.2rem;
+  flex-grow: 1;
+}
+
+.container {
+  max-width: 570px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 10px;
+  box-sizing: border-box;
+  @include phone {
+    max-width: $smd;
+  }
+  @include small-laptop {
+    max-width: $md;
+  }
+  @include laptop {
+    max-width: $lg;
+    padding: 0;
+  }
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
