@@ -1,12 +1,14 @@
 stages:
-  - deploy_production
+  - deploy
 
 deploy:
   image: ruby:latest
   stage: deploy
   before_script:
-    -gem install dpl
+    - apt-get update -qy
+    - apt-get install -y ruby-dev
+    - gem install dpl
   script:
     - dpl --provider=heroku --app=$HEROKU_APP_NAME --api-key=$HEROKU_PRODUCTION_KEY
   only:
-    - main
+    - master
