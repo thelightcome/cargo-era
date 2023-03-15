@@ -1,5 +1,5 @@
 stages:
-  - deploy_production
+  - deploy
 
 deploy:
   image: ruby:latest
