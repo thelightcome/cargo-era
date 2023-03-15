@@ -1,12 +1,19 @@
-image: node:latest
+image: node:16.16.0
 
 cache:
   paths:
     - node_modules/
 
-heroku_deploy:
-  stage: deploy
+stages:
+  - deploy_production
+
+Production:
+  image: ruby:latest
+  only:
+    - master
+  stage: deploy_production
   script:
+    - apt-get update -qy
+    - apt-get install -y ruby-dev
     - gem install dpl
     - dpl --provider=heroku --app=$HEROKU_APP_NAME --api-key=$HEROKU_PRODUCTION_KEY
-  environment: production
