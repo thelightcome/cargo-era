@@ -1,6 +1,7 @@
 import { Context } from '@nuxt/types'
+import { Middleware } from '@nuxt/types'
 
-export default function ({ $auth, redirect }: Context) {
+const adminMiddlewar: Middleware = ({ $auth, redirect }: Context) => {
   if ($auth.loggedIn) {
     if (
       ($auth.user?.authorities as string[])?.includes(
@@ -13,3 +14,5 @@ export default function ({ $auth, redirect }: Context) {
     }
   }
 }
+
+export default adminMiddlewar
