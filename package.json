@@ -3,7 +3,7 @@
   "version": "2.3.0",
   "private": true,
   "engines": {
-    "node": ">=16.x"
+    "node": "16.x"
   },
   "scripts": {
     "docker:dev": "docker-compose -f docker-compose.dev.yml up",
