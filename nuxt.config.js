@@ -85,8 +85,6 @@ const config = {
     '@nuxtjs/pwa',
     '@nuxtjs/style-resources',
     '@nuxtjs/i18n',
-    '@nuxtjs/markdownit',
-    '@nuxtjs/sentry',
     'nuxt-healthcheck',
     '@nuxtjs/proxy',
   ],
