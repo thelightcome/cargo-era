@@ -1,12 +1,13 @@
 {
-  "name": "rocketfront_hybrid",
+  "name": "cargo",
   "version": "2.3.0",
   "private": true,
   "engines": {
-    "node": "16.x"
+    "node": "16.x",
+    "npm": "8.11.0"
   },
   "scripts": {
-    "heroku-prebuild": "export NPM_CONFIG_PRODUCTION=false; export NODE_ENV=; NPM_CONFIG_PRODUCTION=false NODE_ENV=development npm install --only=dev --dev",
+    "heroku-prebuild": "export NPM_CONFIG_PRODUCTION=false; export NODE_ENV=; NPM_CONFIG_PRODUCTION=false NODE_ENV=development npm install --only=dev --dev --legacy-peer-deps",
     "heroku-postbuild": "export NPM_CONFIG_PRODUCTION=true; export NODE_ENV=production;",
     "docker:dev": "docker-compose -f docker-compose.dev.yml up",
     "serve": "nuxt",
