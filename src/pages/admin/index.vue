@@ -2,20 +2,26 @@
   <div class="page add">
     <div class="container flex-col">
       <ScanForm v-model="barcode" title="Product Scan" class="add__barcode" />
+      <div v-show="barcode" class="add__btns">
+        <Button @click="trackProduct">Send To Check</Button>
+      </div>
       <AddProduct
-        v-if="true"
+        v-if="exist === false"
         :is-user="false"
         :barcode="barcode"
         class="add__product"
         @onSubmit="onSubmit"
       />
       <ScanForm
-        v-if="true"
+        v-if="exist === true"
         v-model="qrcode"
         title="Card Scan"
         type="qrcode"
         class="add__qrcode"
       />
+      <div v-show="qrcode" class="add__btns">
+        <Button @click="addProductToCard">Send To Bag</Button>
+      </div>
     </div>
   </div>
 </template>
@@ -25,30 +31,21 @@ import Vue from 'vue'
 
 import { ICreateProduct } from 'types/product.types'
 
+import Button from 'components/ui/Button.vue'
 import ScanForm from 'components/admin/ScanForm.vue'
 import AddProduct from 'components/product/AddProduct.vue'
 
 export default Vue.extend({
   name: 'PageAdminIndex',
-  components: { ScanForm, AddProduct },
+  components: { ScanForm, AddProduct, Button },
   layout: 'admin',
   data() {
     return {
       barcode: '',
-      exist: true,
+      exist: null as null | boolean,
       description: '',
       qrcode: '',
     }
-  },
-  watch: {
-    barcode(oldValue, newValue) {
-      if (oldValue === newValue) return
-      this.trackProduct()
-    },
-    qrcode(oldValue, newValue) {
-      if (oldValue === newValue) return
-      this.addProductToCard()
-    },
   },
   methods: {
     async trackProduct() {
@@ -56,7 +53,10 @@ export default Vue.extend({
       if (!res) this.exist = false
     },
     async onSubmit(createProduct: ICreateProduct) {
-      const res = await this.$repositories.product.addProduct(createProduct)
+      const res = await this.$repositories.product.addProduct({
+        ...createProduct,
+        trackCode: this.barcode,
+      })
       if (res) this.exist = true
     },
     async addProductToCard() {
@@ -85,6 +85,11 @@ export default Vue.extend({
 
   &__qrcode {
     max-width: 450px;
+    margin-bottom: 1rem;
+  }
+
+  &__btns {
+    margin-bottom: 1rem;
   }
 }
 </style>

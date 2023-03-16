@@ -4,7 +4,7 @@
   "private": true,
   "engines": {
     "node": "16.x",
-    "npm": "8.11.0"
+    "yarn": "1.22.19"
   },
   "scripts": {
     "heroku-prebuild": "export NPM_CONFIG_PRODUCTION=false; export NODE_ENV=; NPM_CONFIG_PRODUCTION=false NODE_ENV=development npm install --only=dev --dev --legacy-peer-deps",

@@ -32,7 +32,6 @@ export default Vue.extend({
           rememberMe: true,
         },
       })
-      // const res = this.$repositories.auth.register(data)
       console.log(res)
     },
     getRespawnCode(login: string) {

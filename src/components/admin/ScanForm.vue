@@ -53,7 +53,7 @@ const TYPE_TITLES: { [key in TYPES_SCAN]: string } = {
 }
 
 export default Vue.extend({
-  name: 'ProductScan',
+  name: 'ScanForm',
   components: { Scanner, Input, Button, IconBarCode, IconQrCode },
   props: {
     title: {
