@@ -20,7 +20,9 @@
       "services/*": ["./src/services/*"],
       "repositories/*": ["./src/repositories/*"],
       "types/*": ["./src/types/*"],
-      "plugins/*": ["./src/plugins"]
+      "layouts/*": ["./src/layouts"],
+      "middleware/*": ["./src/middleware"],
+      "pages/*": ["./src/pages"]
     },
     "types": [
       "@nuxt/types",
