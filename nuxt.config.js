@@ -1,9 +1,18 @@
 import { resolve } from 'path'
+import { readFileSync } from 'fs'
 
 import { ru } from './src/i18n/ru'
 
 const config = {
   ssr: process.env.NODE_ENV !== 'mobile',
+
+  server: {
+    host: '0.0.0.0',
+    https: {
+      key: readFileSync(resolve(__dirname, 'ssh/thelightcome.key')),
+      cert: readFileSync(resolve(__dirname, 'ssh/thelightcome.crt')),
+    },
+  },
 
   router: {
     mode: process.env.NODE_ENV === 'mobile' ? 'hash' : 'history',
