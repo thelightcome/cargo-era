@@ -55,9 +55,9 @@ import IconQrCode from 'icons/qr-code.svg?inline'
 import Input from 'components/ui/Input.vue'
 import Button from 'components/ui/Button.vue'
 import Reader from 'components/readers/Reader.vue'
-import ZXingCoder from 'components/readers/ZXingCoder.vue'
-import MozScanner from 'components/readers/MozScanner.vue'
-import ScanbotSDK from 'components/readers/ScanbotSDK.vue'
+// import ZXingCoder from 'components/readers/ZXingCoder.vue'
+// import MozScanner from 'components/readers/MozScanner.vue'
+// import ScanbotSDK from 'components/readers/ScanbotSDK.vue'
 import DynamicSoftScanner from 'components/readers/DynamicSoftScanner.vue'
 
 export type TYPES_SCAN = 'barcode' | 'qrcode'
@@ -78,9 +78,9 @@ export default Vue.extend({
     Reader,
     Input,
     Button,
-    ZXingCoder,
-    MozScanner,
-    ScanbotSDK,
+    // ZXingCoder,
+    // MozScanner,
+    // ScanbotSDK,
     DynamicSoftScanner,
     IconBarCode,
     IconQrCode,
