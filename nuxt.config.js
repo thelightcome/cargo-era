@@ -83,9 +83,9 @@ const config = {
     { src: '~/plugins/touch-events.ts', mode: 'client' },
     { src: '~/plugins/v-mask.js' },
     { src: '~/plugins/code-reader.ts', mode: 'client' },
-    { src: '~/plugins/v-quagga.js', mode: 'client' },
-    { src: '~/plugins/zxing-browser.ts', mode: 'client' },
-    { src: '~/plugins/ScanbotSDK.ts', mode: 'client' },
+    // { src: '~/plugins/v-quagga.js', mode: 'client' },
+    // { src: '~/plugins/zxing-browser.ts', mode: 'client' },
+    // { src: '~/plugins/ScanbotSDK.ts', mode: 'client' },
     { src: '~/plugins/DynamicSoftScanner.ts', mode: 'client' },
   ],
 
