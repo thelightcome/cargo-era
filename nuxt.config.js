@@ -6,14 +6,17 @@ import { ru } from './src/i18n/ru'
 const config = {
   ssr: process.env.NODE_ENV !== 'mobile',
 
-  server: {
-    host: '0.0.0.0',
-    port: 8000,
-    https: {
-      key: readFileSync(resolve(__dirname, 'ssh/localhost-key.pem')),
-      cert: readFileSync(resolve(__dirname, 'ssh/localhost.pem')),
-    },
-  },
+  server:
+    process.env.NODE_ENV === 'development'
+      ? {
+          host: '0.0.0.0',
+          port: 8000,
+          https: {
+            key: readFileSync(resolve(__dirname, 'ssh/localhost-key.pem')),
+            cert: readFileSync(resolve(__dirname, 'ssh/localhost.pem')),
+          },
+        }
+      : {},
 
   router: {
     mode: process.env.NODE_ENV === 'mobile' ? 'hash' : 'history',
