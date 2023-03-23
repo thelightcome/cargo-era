@@ -31,7 +31,6 @@ const config = {
 
   publicRuntimeConfig: {
     DYNAMIC_SOFT_LICENSE_KEY: process.env.DYNAMIC_SOFT_LICENSE_KEY,
-    DYNAMIC_SOFT_WASM_PATH: process.env.DYNAMIC_SOFT_WASM_PATH,
   },
 
   env: {
