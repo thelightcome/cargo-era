@@ -8,9 +8,10 @@ const config = {
 
   server: {
     host: '0.0.0.0',
+    port: 8000,
     https: {
-      key: readFileSync(resolve(__dirname, 'ssh/thelightcome.key')),
-      cert: readFileSync(resolve(__dirname, 'ssh/thelightcome.crt')),
+      key: readFileSync(resolve(__dirname, 'ssh/localhost-key.pem')),
+      cert: readFileSync(resolve(__dirname, 'ssh/localhost.pem')),
     },
   },
 
@@ -23,6 +24,11 @@ const config = {
       collapseWhitespace: false,
     },
     fallback: 'error.html',
+  },
+
+  publicRuntimeConfig: {
+    DYNAMIC_SOFT_LICENSE_KEY: process.env.DYNAMIC_SOFT_LICENSE_KEY,
+    DYNAMIC_SOFT_WASM_PATH: process.env.DYNAMIC_SOFT_WASM_PATH,
   },
 
   env: {
@@ -75,6 +81,10 @@ const config = {
     { src: '~/plugins/touch-events.ts', mode: 'client' },
     { src: '~/plugins/v-mask.js' },
     { src: '~/plugins/code-reader.ts', mode: 'client' },
+    { src: '~/plugins/v-quagga.js', mode: 'client' },
+    { src: '~/plugins/zxing-browser.ts', mode: 'client' },
+    { src: '~/plugins/ScanbotSDK.ts', mode: 'client' },
+    { src: '~/plugins/DynamicSoftScanner.ts', mode: 'client' },
   ],
 
   components: false,

@@ -41,9 +41,6 @@ export default Vue.extend({
       ],
     }
   },
-  mounted() {
-    console.log('$auth.user', this.$auth.user)
-  },
 })
 </script>
 

@@ -1,8 +1,8 @@
 <template>
-  <div class="scanner" @click="$emit('click')">
+  <div class="reader" @click="$emit('click')">
     <ClientOnly>
       <StreamBarcodeReader
-        class="scanner__body"
+        class="reader__body"
         @decode="onDecode"
         @loaded="onLoaded"
       ></StreamBarcodeReader>
@@ -14,13 +14,12 @@
 import Vue from 'vue'
 
 export default Vue.extend({
-  name: 'Scanner',
+  name: 'Reader',
   methods: {
     onDecode(e: string) {
       this.$emit('onDecode', e)
     },
     onLoaded(e: any) {
-      console.log('loaded', e)
       this.$emit('loaded', e)
     },
   },

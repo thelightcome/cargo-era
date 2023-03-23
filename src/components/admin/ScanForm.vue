@@ -11,12 +11,28 @@
         <component :is="getIcon" class="scan-form__icon"></component>
       </span>
     </Button>
-    <Scanner
-      v-if="active"
-      class="scan-form__scanner"
-      @onDecode="onDecode"
-      @click="active = false"
-    />
+    <ClientOnly>
+      <DynamicSoftScanner
+        v-if="active && isBarCode"
+        class="scan-form__barcode"
+        @onDecode="onDecode"
+      />
+      <!-- <ScanbotSDK @onDecode="onDecode" /> -->
+      <!-- <MozScanner /> -->
+      <!-- <ZXingCoder @onDecode="onDecode" /> -->
+      <!-- <v-quagga
+        v-if="active && isBarCode"
+        :on-detected="onDecode"
+        class="scanner"
+        :reader-types="barcodes"
+      ></v-quagga> -->
+      <Reader
+        v-if="active && !isBarCode"
+        class="scan-form__scanner"
+        @onDecode="onDecode"
+        @click="active = false"
+      />
+    </ClientOnly>
     <Input
       :id="title"
       v-model="model"
@@ -36,9 +52,13 @@ import type { PropType } from 'vue'
 import IconBarCode from 'icons/barcode.svg?inline'
 import IconQrCode from 'icons/qr-code.svg?inline'
 
-import Scanner from 'components/ui/Scanner.vue'
 import Input from 'components/ui/Input.vue'
 import Button from 'components/ui/Button.vue'
+import Reader from 'components/readers/Reader.vue'
+import ZXingCoder from 'components/readers/ZXingCoder.vue'
+import MozScanner from 'components/readers/MozScanner.vue'
+import ScanbotSDK from 'components/readers/ScanbotSDK.vue'
+import DynamicSoftScanner from 'components/readers/DynamicSoftScanner.vue'
 
 export type TYPES_SCAN = 'barcode' | 'qrcode'
 
@@ -54,7 +74,17 @@ const TYPE_TITLES: { [key in TYPES_SCAN]: string } = {
 
 export default Vue.extend({
   name: 'ScanForm',
-  components: { Scanner, Input, Button, IconBarCode, IconQrCode },
+  components: {
+    Reader,
+    Input,
+    Button,
+    ZXingCoder,
+    MozScanner,
+    ScanbotSDK,
+    DynamicSoftScanner,
+    IconBarCode,
+    IconQrCode,
+  },
   props: {
     title: {
       type: String,
@@ -72,6 +102,14 @@ export default Vue.extend({
   data() {
     return {
       active: false,
+      barcodes: [
+        'code_128_reader',
+        'ean_reader',
+        'ean_8_reader',
+        'code_39_reader',
+        'code_39_vin_reader',
+        'codabar_reader',
+      ],
     }
   },
   computed: {
@@ -80,6 +118,9 @@ export default Vue.extend({
     },
     getTitle(): string {
       return TYPE_TITLES[this.type as TYPES_SCAN]
+    },
+    isBarCode(): boolean {
+      return this.type === 'barcode'
     },
     model: {
       get(): string {
@@ -109,6 +150,10 @@ export default Vue.extend({
   border-radius: 2rem;
   transition: 0.3s;
 
+  &__barcode {
+    margin-bottom: 1rem;
+  }
+
   &--active {
     border-color: $b-primary;
   }
@@ -136,6 +181,19 @@ export default Vue.extend({
 
   &__scanner {
     margin-bottom: 1rem;
+  }
+}
+
+.scanner {
+  width: 100%;
+
+  ::v-deep video {
+    width: 100%;
+    position: relative !important;
+  }
+
+  ::v-deep canvas {
+    width: 100%;
   }
 }
 </style>
