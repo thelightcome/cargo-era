@@ -50,7 +50,7 @@ const config = {
       { name: 'msapplication-TileColor', content: '#363433' },
       { name: 'theme-color', content: '#ffffff' },
     ],
-    link: [],
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon/favicon.ico' }],
   },
 
   // loading: '~/components/atoms/Loader/index.vue',
