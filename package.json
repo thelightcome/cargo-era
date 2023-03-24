@@ -16,7 +16,7 @@
     "build": "nuxt build",
     "build:docs": "vue-styleguidist build",
     "serve:prod": "nuxt start",
-    "generate": "env nuxt generate",
+    "generate": "nuxt generate",
     "lint:js": "eslint --ext \".js,.vue\" --ignore-path .gitignore .",
     "lint:style": "stylelint \"**/*.{vue,css}\" --ignore-path .gitignore",
     "lint": "yarn lint:js && yarn lint:style",
@@ -35,6 +35,7 @@
     }
   },
   "dependencies": {
+    "@nuxt/typescript-build": "2.1.0",
     "@nuxtjs/auth-next": "5.0.0-1648802546.c9880dc",
     "@nuxtjs/axios": "5.13.6",
     "@nuxtjs/i18n": "7.2.0",
@@ -48,8 +49,8 @@
     "nuxt-healthcheck": "1.0.1",
     "v-mask": "2.3.0",
     "vue-barcode-reader": "0.0.3",
-    "@nuxt/typescript-build": "2.1.0",
-    "vue2-touch-events": "3.2.2"
+    "vue2-touch-events": "3.2.2",
+    "@nuxtjs/stylelint-module": "4.0.0"
   },
   "devDependencies": {
     "@babel/plugin-proposal-optional-chaining": "7.18.9",
@@ -59,7 +60,6 @@
     "@nuxtjs/eslint-config-typescript": "6.0.0",
     "@nuxtjs/eslint-module": "3.0.2",
     "@nuxtjs/style-resources": "1.0.0",
-    "@nuxtjs/stylelint-module": "4.0.0",
     "@nuxtjs/svg": "0.4.0",
     "@testing-library/user-event": "^14.4.3",
     "@types/vue-barcode-reader": "0.0.0",
@@ -85,7 +85,6 @@
     "stylelint-config-prettier": "8.0.2",
     "stylelint-config-standard": "21.0.0",
     "stylelint-scss": "3.19.0",
-    "vue-loader": "15.9.8",
-    "vue-styleguidist": "4.38.0"
+    "vue-loader": "15.9.8"
   }
 }
