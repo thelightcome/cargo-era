@@ -50,6 +50,8 @@
     "v-mask": "2.3.0",
     "vue-barcode-reader": "0.0.3",
     "vue2-touch-events": "3.2.2",
+    "@nuxtjs/svg": "0.4.0",
+    "nuxt-build-optimisations": "1.0.7",
     "@nuxtjs/stylelint-module": "4.0.0"
   },
   "devDependencies": {
@@ -60,7 +62,6 @@
     "@nuxtjs/eslint-config-typescript": "6.0.0",
     "@nuxtjs/eslint-module": "3.0.2",
     "@nuxtjs/style-resources": "1.0.0",
-    "@nuxtjs/svg": "0.4.0",
     "@testing-library/user-event": "^14.4.3",
     "@types/vue-barcode-reader": "0.0.0",
     "babel-core": "7.0.0-bridge.0",
@@ -76,7 +77,6 @@
     "husky": "8.0.1",
     "inquirer": "8.0.0",
     "lint-staged": "13.0.3",
-    "nuxt-build-optimisations": "1.0.7",
     "prettier": "2.2.1",
     "sass": "1.55.0",
     "sass-loader": "10.1.1",
