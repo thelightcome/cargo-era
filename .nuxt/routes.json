@@ -1,0 +1,62 @@
+[
+  {
+    "name": "admin___ru",
+    "path": "/admin",
+    "component": "C:\\\\Users\\\\nurik\\\\Desktop\\\\project\\\\cargo\\\\src\\\\pages\\\\admin\\\\index.vue",
+    "chunkName": "pages/admin/index"
+  },
+  {
+    "name": "auth___ru",
+    "path": "/auth",
+    "component": "C:\\\\Users\\\\nurik\\\\Desktop\\\\project\\\\cargo\\\\src\\\\pages\\\\auth\\\\index.vue",
+    "chunkName": "pages/auth/index"
+  },
+  {
+    "name": "user___ru",
+    "path": "/user",
+    "component": "C:\\\\Users\\\\nurik\\\\Desktop\\\\project\\\\cargo\\\\src\\\\pages\\\\user\\\\index.vue",
+    "chunkName": "pages/user/index"
+  },
+  {
+    "name": "admin-list___ru",
+    "path": "/admin/list",
+    "component": "C:\\\\Users\\\\nurik\\\\Desktop\\\\project\\\\cargo\\\\src\\\\pages\\\\admin\\\\list.vue",
+    "chunkName": "pages/admin/list"
+  },
+  {
+    "name": "admin-setting___ru",
+    "path": "/admin/setting",
+    "component": "C:\\\\Users\\\\nurik\\\\Desktop\\\\project\\\\cargo\\\\src\\\\pages\\\\admin\\\\setting.vue",
+    "chunkName": "pages/admin/setting"
+  },
+  {
+    "name": "auth-register___ru",
+    "path": "/auth/register",
+    "component": "C:\\\\Users\\\\nurik\\\\Desktop\\\\project\\\\cargo\\\\src\\\\pages\\\\auth\\\\register.vue",
+    "chunkName": "pages/auth/register"
+  },
+  {
+    "name": "auth-respawn___ru",
+    "path": "/auth/respawn",
+    "component": "C:\\\\Users\\\\nurik\\\\Desktop\\\\project\\\\cargo\\\\src\\\\pages\\\\auth\\\\respawn.vue",
+    "chunkName": "pages/auth/respawn"
+  },
+  {
+    "name": "user-list___ru",
+    "path": "/user/list",
+    "component": "C:\\\\Users\\\\nurik\\\\Desktop\\\\project\\\\cargo\\\\src\\\\pages\\\\user\\\\list.vue",
+    "chunkName": "pages/user/list"
+  },
+  {
+    "name": "user-setting___ru",
+    "path": "/user/setting",
+    "component": "C:\\\\Users\\\\nurik\\\\Desktop\\\\project\\\\cargo\\\\src\\\\pages\\\\user\\\\setting.vue",
+    "chunkName": "pages/user/setting"
+  },
+  {
+    "name": "index___ru",
+    "path": "/",
+    "component": "C:\\\\Users\\\\nurik\\\\Desktop\\\\project\\\\cargo\\\\src\\\\pages\\\\index.vue",
+    "chunkName": "pages/index"
+  }
+]
