@@ -23,22 +23,59 @@ export default Vue.extend({
   name: 'PageLogin',
   components: { LoginForm },
   layout: 'auth',
+  mounted() {
+    if (typeof this.$route?.query?.key === 'string')
+      this.activate(this.$route.query.key as string)
+  },
   methods: {
-    onSubmit(data: ILoginUserDto) {
-      const res = this.$auth.loginWith('local', {
-        data: {
-          username: data.login,
-          password: data.password,
-          rememberMe: true,
-        },
-      })
-      console.log(res)
+    async onSubmit(data: ILoginUserDto) {
+      try {
+        this.$nuxt.$loading.start()
+        await this.$auth.loginWith('local', {
+          data: {
+            email: data.email,
+            password: data.password,
+            rememberMe: true,
+          },
+        })
+      } catch (err: any) {
+        this.$store.dispatch('toast/setToast', {
+          type: 'error',
+          message: this.$tc(err.error),
+        })
+      } finally {
+        this.$nuxt.$loading.finish()
+      }
     },
-    getRespawnCode(login: string) {
-      const res = this.$repositories.auth.getRespawnCode(login)
-      console.log(res)
-
-      this.$router.push(this.localePath('/auth/respawn'))
+    async getRespawnCode(email: string) {
+      try {
+        this.$nuxt.$loading.start()
+        await this.$repositories.auth.getRespawnCode(email)
+        this.$router.push(
+          this.localePath(`/auth/respawn?email=${encodeURI(email)}`)
+        )
+      } catch (err: any) {
+        this.$store.dispatch('toast/setToast', {
+          type: 'error',
+          message: this.$tc(err.error),
+        })
+      } finally {
+        this.$nuxt.$loading.finish()
+      }
+    },
+    async activate(key: string) {
+      try {
+        await this.$repositories.auth.activate(key)
+        this.$store.dispatch('toast/setToast', {
+          type: 'valid',
+          message: 'Email was activated',
+        })
+      } catch (err: any) {
+        this.$store.dispatch('toast/setToast', {
+          type: 'error',
+          message: this.$tc(err.error),
+        })
+      }
     },
   },
 })

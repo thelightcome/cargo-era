@@ -2,10 +2,15 @@
   <div class="page page-list">
     <div class="container flex-col page-list__container">
       <Search class="page-list__search" @search="search" />
-      <Tab :heads="['China', 'Kazahstan', 'Recieved']" class="page-list__tab">
+      <Tab
+        :heads="tabs"
+        :current="tabType"
+        class="page-list__tab"
+        @select="select"
+      >
         <ProductList :list="listMock" class="page-list__list" />
       </Tab>
-      <Pagination :current="current" :total="5" @change="change" />
+      <Pagination :current="currentPage" :total="totalPage" @change="change" />
     </div>
   </div>
 </template>
@@ -24,331 +29,46 @@ export default Vue.extend({
   layout: 'user',
   data() {
     return {
-      current: 1,
-      listMock: [
-        {
-          trackCode: 'string',
-          description: 'string',
-          userCode: 'string',
-          branchDescription: 'string',
-          productDetails: [
-            {
-              id: 0,
-              createdDate: 'string',
-              branchCode: 'string',
-              branchDescription: 'string',
-            },
-            {
-              id: 0,
-              createdDate: 'string',
-              branchCode: 'string',
-              branchDescription: 'string',
-            },
-            {
-              id: 0,
-              createdDate: 'string',
-              branchCode: 'string',
-              branchDescription: 'string',
-            },
-          ],
-        },
-        {
-          trackCode: 'string',
-          description: 'string',
-          userCode: 'string',
-          branchDescription: 'string',
-          productDetails: [
-            {
-              id: 0,
-              createdDate: 'string',
-              branchCode: 'string',
-              branchDescription: 'string',
-            },
-            {
-              id: 0,
-              createdDate: 'string',
-              branchCode: 'string',
-              branchDescription: 'string',
-            },
-            {
-              id: 0,
-              createdDate: 'string',
-              branchCode: 'string',
-              branchDescription: 'string',
-            },
-          ],
-        },
-        {
-          trackCode: 'string',
-          description: 'string',
-          userCode: 'string',
-          branchDescription: 'string',
-          productDetails: [
-            {
-              id: 0,
-              createdDate: 'string',
-              branchCode: 'string',
-              branchDescription: 'string',
-            },
-            {
-              id: 0,
-              createdDate: 'string',
-              branchCode: 'string',
-              branchDescription: 'string',
-            },
-            {
-              id: 0,
-              createdDate: 'string',
-              branchCode: 'string',
-              branchDescription: 'string',
-            },
-          ],
-        },
-        {
-          trackCode: 'string',
-          description: 'string',
-          userCode: 'string',
-          branchDescription: 'string',
-          productDetails: [
-            {
-              id: 0,
-              createdDate: 'string',
-              branchCode: 'string',
-              branchDescription: 'string',
-            },
-            {
-              id: 0,
-              createdDate: 'string',
-              branchCode: 'string',
-              branchDescription: 'string',
-            },
-            {
-              id: 0,
-              createdDate: 'string',
-              branchCode: 'string',
-              branchDescription: 'string',
-            },
-          ],
-        },
-        {
-          trackCode: 'string',
-          description: 'string',
-          userCode: 'string',
-          branchDescription: 'string',
-          productDetails: [
-            {
-              id: 0,
-              createdDate: 'string',
-              branchCode: 'string',
-              branchDescription: 'string',
-            },
-            {
-              id: 0,
-              createdDate: 'string',
-              branchCode: 'string',
-              branchDescription: 'string',
-            },
-            {
-              id: 0,
-              createdDate: 'string',
-              branchCode: 'string',
-              branchDescription: 'string',
-            },
-          ],
-        },
-        {
-          trackCode: 'string',
-          description: 'string',
-          userCode: 'string',
-          branchDescription: 'string',
-          productDetails: [
-            {
-              id: 0,
-              createdDate: 'string',
-              branchCode: 'string',
-              branchDescription: 'string',
-            },
-            {
-              id: 0,
-              createdDate: 'string',
-              branchCode: 'string',
-              branchDescription: 'string',
-            },
-            {
-              id: 0,
-              createdDate: 'string',
-              branchCode: 'string',
-              branchDescription: 'string',
-            },
-          ],
-        },
-        {
-          trackCode: 'string',
-          description: 'string',
-          userCode: 'string',
-          branchDescription: 'string',
-          productDetails: [
-            {
-              id: 0,
-              createdDate: 'string',
-              branchCode: 'string',
-              branchDescription: 'string',
-            },
-            {
-              id: 0,
-              createdDate: 'string',
-              branchCode: 'string',
-              branchDescription: 'string',
-            },
-            {
-              id: 0,
-              createdDate: 'string',
-              branchCode: 'string',
-              branchDescription: 'string',
-            },
-          ],
-        },
-        {
-          trackCode: 'string',
-          description: 'string',
-          userCode: 'string',
-          branchDescription: 'string',
-          productDetails: [
-            {
-              id: 0,
-              createdDate: 'string',
-              branchCode: 'string',
-              branchDescription: 'string',
-            },
-            {
-              id: 0,
-              createdDate: 'string',
-              branchCode: 'string',
-              branchDescription: 'string',
-            },
-            {
-              id: 0,
-              createdDate: 'string',
-              branchCode: 'string',
-              branchDescription: 'string',
-            },
-          ],
-        },
-        {
-          trackCode: 'string',
-          description: 'string',
-          userCode: 'string',
-          branchDescription: 'string',
-          productDetails: [
-            {
-              id: 0,
-              createdDate: 'string',
-              branchCode: 'string',
-              branchDescription: 'string',
-            },
-            {
-              id: 0,
-              createdDate: 'string',
-              branchCode: 'string',
-              branchDescription: 'string',
-            },
-            {
-              id: 0,
-              createdDate: 'string',
-              branchCode: 'string',
-              branchDescription: 'string',
-            },
-          ],
-        },
-        {
-          trackCode: 'string',
-          description: 'string',
-          userCode: 'string',
-          branchDescription: 'string',
-          productDetails: [
-            {
-              id: 0,
-              createdDate: 'string',
-              branchCode: 'string',
-              branchDescription: 'string',
-            },
-            {
-              id: 0,
-              createdDate: 'string',
-              branchCode: 'string',
-              branchDescription: 'string',
-            },
-            {
-              id: 0,
-              createdDate: 'string',
-              branchCode: 'string',
-              branchDescription: 'string',
-            },
-          ],
-        },
-        {
-          trackCode: 'string',
-          description: 'string',
-          userCode: 'string',
-          branchDescription: 'string',
-          productDetails: [
-            {
-              id: 0,
-              createdDate: 'string',
-              branchCode: 'string',
-              branchDescription: 'string',
-            },
-          ],
-        },
-        {
-          trackCode: 'string',
-          description: 'string',
-          userCode: 'string',
-          branchDescription: 'string',
-          productDetails: [
-            {
-              id: 0,
-              createdDate: 'string',
-              branchCode: 'string',
-              branchDescription: 'string',
-            },
-            {
-              id: 0,
-              createdDate: 'string',
-              branchCode: 'string',
-              branchDescription: 'string',
-            },
-            {
-              id: 0,
-              createdDate: 'string',
-              branchCode: 'string',
-              branchDescription: 'string',
-            },
-          ],
-        },
-        {
-          trackCode: 'string',
-          description: 'string',
-          userCode: 'string',
-          branchDescription: 'string',
-          productDetails: [
-            {
-              id: 0,
-              createdDate: 'string',
-              branchCode: 'string',
-              branchDescription: 'string',
-            },
-          ],
-        },
-      ],
+      tabType: 0,
+      currentPage: 1,
+      searchText: '',
+      totalPage: 10,
+      tabs: ['china', 'kazahstan', 'recieved'],
+      listMock: [],
     }
   },
   methods: {
-    change(n: number) {
-      this.current = n
+    select(type: string) {
+      this.currentPage = 0
+      this.searchText = ''
+      this.tabType = this.tabs.findIndex((e) => e === type)
+      this.getList()
     },
-    search(v: string) {
-      console.log(v)
+    change(pageNumber: number) {
+      this.currentPage = pageNumber
+      this.getList()
+    },
+    search(searchText: string) {
+      this.searchText = searchText
+      this.getList()
+    },
+    async getList() {
+      try {
+        this.$nuxt.$loading.start()
+        const res = await this.$repositories.product.getProducts({
+          code: this.searchText,
+          branchGroup: this.tabType,
+          page: this.currentPage,
+        })
+        console.log(res)
+      } catch (err: any) {
+        this.$store.dispatch('toast/setToast', {
+          type: 'error',
+          message: this.$tc(err.error),
+        })
+      } finally {
+        this.$nuxt.$loading.finish()
+      }
     },
   },
 })

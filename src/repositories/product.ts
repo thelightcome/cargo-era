@@ -1,4 +1,8 @@
-import { ICreateProduct, IAddProductToCard } from 'types/product.types'
+import {
+  ICreateProduct,
+  IAddProductToCard,
+  IGetProducts,
+} from 'types/product.types'
 
 import Base from './base'
 
@@ -21,5 +25,16 @@ export default class Product extends Base {
       }
     })
     // return await this.PUT(`/products/card/${body.trackCode}`, body, {})
+  }
+
+  async getProducts(body: IGetProducts) {
+    console.log(body)
+    await new Promise((resolve, reject) => {
+      try {
+        resolve('scsc')
+      } catch (err) {
+        reject(err)
+      }
+    })
   }
 }

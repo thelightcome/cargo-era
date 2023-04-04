@@ -11,7 +11,7 @@ import Vue from 'vue'
 
 import { ICreateProduct } from 'types/product.types'
 
-import AddProduct, { ICAddProduct } from 'components/product/AddProduct.vue'
+import AddProduct from 'components/product/AddProduct.vue'
 
 export default Vue.extend({
   name: 'PageUserIndex',
@@ -19,9 +19,20 @@ export default Vue.extend({
   layout: 'user',
   methods: {
     async onSubmit(createProduct: ICreateProduct) {
-      const res = await this.$repositories.product.addProduct(createProduct)
-      if (res) {
-        ;(this.$refs.form as ICAddProduct)?.clear()
+      try {
+        this.$nuxt.$loading.start()
+        await this.$repositories.product.addProduct(createProduct)
+        this.$store.dispatch('toast/setToast', {
+          type: 'valid',
+          message: 'Product added',
+        })
+      } catch (err: any) {
+        this.$store.dispatch('toast/setToast', {
+          type: 'error',
+          message: this.$tc(err.error),
+        })
+      } finally {
+        this.$nuxt.$loading.finish()
       }
     },
   },

@@ -28,15 +28,13 @@ export default Vue.extend({
       type: Array as PropType<string[]>,
       required: true,
     },
-  },
-  data() {
-    return {
-      current: 0,
-    }
+    current: {
+      type: Number,
+      required: true,
+    },
   },
   methods: {
     select(index: number) {
-      this.current = index
       this.$emit('select', this.heads[index])
     },
   },

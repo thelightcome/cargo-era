@@ -16,15 +16,15 @@ import { createStore } from './store.js'
 import nuxt_plugin_pluginutils_01c12326 from 'nuxt_plugin_pluginutils_01c12326' // Source: .\\nuxt-i18n\\plugin.utils.js (mode: 'all')
 import nuxt_plugin_pluginrouting_6afe1478 from 'nuxt_plugin_pluginrouting_6afe1478' // Source: .\\nuxt-i18n\\plugin.routing.js (mode: 'all')
 import nuxt_plugin_pluginmain_66002c12 from 'nuxt_plugin_pluginmain_66002c12' // Source: .\\nuxt-i18n\\plugin.main.js (mode: 'all')
-import nuxt_plugin_metaplugin_19b00306 from 'nuxt_plugin_metaplugin_19b00306' // Source: .\\pwa\\meta.plugin.js (mode: 'all')
 import nuxt_plugin_axios_1161e621 from 'nuxt_plugin_axios_1161e621' // Source: .\\axios.js (mode: 'all')
+import nuxt_plugin_metaplugin_19b00306 from 'nuxt_plugin_metaplugin_19b00306' // Source: .\\pwa\\meta.plugin.js (mode: 'all')
+import nuxt_plugin_iconplugin_1060b81e from 'nuxt_plugin_iconplugin_1060b81e' // Source: .\\pwa\\icon.plugin.js (mode: 'all')
 import nuxt_plugin_axios_5659d192 from 'nuxt_plugin_axios_5659d192' // Source: ..\\src\\plugins\\axios.js (mode: 'all')
 import nuxt_plugin_index_424d3a14 from 'nuxt_plugin_index_424d3a14' // Source: ..\\src\\plugins\\services\\index.ts (mode: 'all')
 import nuxt_plugin_index_b9eb6fa8 from 'nuxt_plugin_index_b9eb6fa8' // Source: ..\\src\\plugins\\repositories\\index.ts (mode: 'all')
 import nuxt_plugin_touchevents_59d56030 from 'nuxt_plugin_touchevents_59d56030' // Source: ..\\src\\plugins\\touch-events.ts (mode: 'client')
 import nuxt_plugin_vmask_3c04b27e from 'nuxt_plugin_vmask_3c04b27e' // Source: ..\\src\\plugins\\v-mask.js (mode: 'all')
 import nuxt_plugin_codereader_affeaec0 from 'nuxt_plugin_codereader_affeaec0' // Source: ..\\src\\plugins\\code-reader.ts (mode: 'client')
-import nuxt_plugin_DynamicSoftScanner_6acca6fc from 'nuxt_plugin_DynamicSoftScanner_6acca6fc' // Source: ..\\src\\plugins\\DynamicSoftScanner.ts (mode: 'client')
 import nuxt_plugin_auth_0c8bfaef from 'nuxt_plugin_auth_0c8bfaef' // Source: .\\auth.js (mode: 'all')
 
 // Component: <ClientOnly>
@@ -234,12 +234,16 @@ async function createApp(ssrContext, config = {}) {
     await nuxt_plugin_pluginmain_66002c12(app.context, inject)
   }
 
+  if (typeof nuxt_plugin_axios_1161e621 === 'function') {
+    await nuxt_plugin_axios_1161e621(app.context, inject)
+  }
+
   if (typeof nuxt_plugin_metaplugin_19b00306 === 'function') {
     await nuxt_plugin_metaplugin_19b00306(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_axios_1161e621 === 'function') {
-    await nuxt_plugin_axios_1161e621(app.context, inject)
+  if (typeof nuxt_plugin_iconplugin_1060b81e === 'function') {
+    await nuxt_plugin_iconplugin_1060b81e(app.context, inject)
   }
 
   if (typeof nuxt_plugin_axios_5659d192 === 'function') {
@@ -264,10 +268,6 @@ async function createApp(ssrContext, config = {}) {
 
   if (process.client && typeof nuxt_plugin_codereader_affeaec0 === 'function') {
     await nuxt_plugin_codereader_affeaec0(app.context, inject)
-  }
-
-  if (process.client && typeof nuxt_plugin_DynamicSoftScanner_6acca6fc === 'function') {
-    await nuxt_plugin_DynamicSoftScanner_6acca6fc(app.context, inject)
   }
 
   if (typeof nuxt_plugin_auth_0c8bfaef === 'function') {

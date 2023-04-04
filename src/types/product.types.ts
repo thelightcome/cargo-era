@@ -23,3 +23,9 @@ export interface IProduct {
     }
   ]
 }
+
+export interface IGetProducts {
+  code: string
+  branchGroup: number
+  page: number
+}

@@ -16,6 +16,7 @@
         id="password"
         v-model="password"
         label="Password"
+        name="password"
         icon="password"
         type="password"
         variant="transparent"
@@ -27,6 +28,7 @@
         id="newPassword"
         v-model="newPassword"
         label="New Password"
+        name="newPassword"
         icon="password"
         type="password"
         variant="transparent"
@@ -96,11 +98,25 @@ export default Vue.extend({
     async onSubmit() {
       this.check()
       if (this.isHasError) return
-      await this.$repositories.user.changePassword({
-        currentPassword: this.password,
-        newPassword: this.newPassword,
-      })
-      this.edit = false
+      try {
+        this.$nuxt.$loading.start()
+        await this.$repositories.user.changePassword({
+          currentPassword: this.password,
+          newPassword: this.newPassword,
+        })
+        this.edit = false
+        this.$store.dispatch('toast/setToast', {
+          type: 'valid',
+          message: 'User data was changed',
+        })
+      } catch (err: any) {
+        this.$store.dispatch('toast/setToast', {
+          type: 'error',
+          message: this.$tc(err.error),
+        })
+      } finally {
+        this.$nuxt.$loading.finish()
+      }
     },
   },
 })

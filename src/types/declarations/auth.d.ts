@@ -2,11 +2,10 @@ import { Auth as NuxtAuth } from '@nuxtjs/auth-next'
 
 export interface User {
   id: number
-  login: string
   firstName: string
   lastName: string
   email: string
-  tel: string
+  phoneNumber: string
   activated: boolean
   createdBy: string
   createdDate: string

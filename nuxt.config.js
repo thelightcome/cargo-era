@@ -1,7 +1,8 @@
 import { resolve } from 'path'
-import { readFileSync } from 'fs'
+// import { readFileSync } from 'fs'
 
 import { ru } from './src/i18n/ru'
+import { kz } from './src/i18n/kz'
 
 const config = {
   ssr: process.env.NODE_ENV !== 'mobile',
@@ -9,12 +10,12 @@ const config = {
   server:
     process.env.NODE_ENV === 'development'
       ? {
-          host: '0.0.0.0',
-          port: 8000,
-          https: {
-            key: readFileSync(resolve(__dirname, 'ssh/localhost-key.pem')),
-            cert: readFileSync(resolve(__dirname, 'ssh/localhost.pem')),
-          },
+          // host: '192.168.42.128',
+          // port: 8000,
+          // https: {
+          //   key: readFileSync(resolve(__dirname, 'ssh/localhost-key.pem')),
+          //   cert: readFileSync(resolve(__dirname, 'ssh/localhost.pem')),
+          // },
         }
       : {},
 
@@ -55,7 +56,7 @@ const config = {
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon/favicon.ico' }],
   },
 
-  // loading: '~/components/atoms/Loader/index.vue',
+  loading: '~/components/common/Loader.vue',
 
   pageTransition: {},
 
@@ -83,10 +84,6 @@ const config = {
     { src: '~/plugins/touch-events.ts', mode: 'client' },
     { src: '~/plugins/v-mask.js' },
     { src: '~/plugins/code-reader.ts', mode: 'client' },
-    // { src: '~/plugins/v-quagga.js', mode: 'client' },
-    // { src: '~/plugins/zxing-browser.ts', mode: 'client' },
-    // { src: '~/plugins/ScanbotSDK.ts', mode: 'client' },
-    { src: '~/plugins/DynamicSoftScanner.ts', mode: 'client' },
   ],
 
   components: false,
@@ -98,12 +95,12 @@ const config = {
     '@nuxtjs/stylelint-module',
     '@nuxtjs/svg',
     'nuxt-build-optimisations',
+    '@nuxtjs/pwa',
   ],
 
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/auth-next',
-    '@nuxtjs/pwa',
     '@nuxtjs/style-resources',
     '@nuxtjs/i18n',
     'nuxt-healthcheck',
@@ -173,6 +170,11 @@ const config = {
         name: 'Русский',
         iso: 'ru-RU',
       },
+      {
+        code: 'kk',
+        name: 'Қазақша',
+        iso: 'kk-KZ',
+      },
     ],
     defaultLocale: 'ru',
     vueI18nLoader: true,
@@ -182,6 +184,7 @@ const config = {
       silentTranslationWarn: true,
       messages: {
         ru,
+        kz,
       },
     },
   },
@@ -200,14 +203,19 @@ const config = {
   },
 
   pwa: {
+    meta: {
+      name: 'Cargo',
+      description: 'Cargo',
+      theme_color: '#4C9DFB',
+    },
     manifest: {
       name: 'Cargo',
       short_name: 'Cargo',
       description: 'Cargo',
-      lang: 'ru',
-      start_url: process.env.API_URL,
+      start_url: process.env.APP_URL,
       display: 'standalone',
-      theme_color: '#211f1d',
+      theme_color: '#4C9DFB',
+      lang: 'ru',
       orientation: 'portrait',
     },
     workbox: false,

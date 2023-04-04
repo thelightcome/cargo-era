@@ -1,8 +1,7 @@
 export interface IUserData {
-  login: string
   firstName: string
   lastName: string
-  tel: string
+  phoneNumber: string
   email: string
 }
 
@@ -16,11 +15,12 @@ export interface ICreateUserDto extends IUserData {
 }
 
 export interface ILoginUserDto {
-  login: string
+  email: string
   password: string
 }
 
 export interface IRespawnUserDto {
   code: string
+  email: string
   password: string
 }

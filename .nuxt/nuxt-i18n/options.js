@@ -10,9 +10,9 @@ export const nuxtOptions = {
   trailingSlash: undefined,
 }
 export const options = {
-  vueI18n: {"fallbackLocale":"ru","silentTranslationWarn":true,"messages":{"ru":{"errors":{"required":"required","isEmail":"isEmail","min":"min","max":"max","password":"password","sameText":"sameText","isPhone":"isPhone"},"unsuccessfully":"Error","pageErrorMsg":"Неправильно набран URL-адрес, либо страницы больше не существует","toMain":"Перейти назад"}}},
+  vueI18n: {"fallbackLocale":"ru","silentTranslationWarn":true,"messages":{"ru":{"errors":{"required":"required","isEmail":"isEmail","min":"min","max":"max","password":"password","sameText":"sameText","isPhone":"isPhone"},"unsuccessfully":"Error","pageErrorMsg":"Неправильно набран URL-адрес, либо страницы больше не существует","toMain":"Перейти назад"},"kz":{"errors":{"required":"required","isEmail":"isEmail","min":"min","max":"max","password":"password","sameText":"sameText","isPhone":"isPhone"},"unsuccessfully":"Error","pageErrorMsg":"Неправильно набран URL-адрес, либо страницы больше не существует","toMain":"Перейти назад"}}},
   vueI18nLoader: true,
-  locales: [{"code":"ru","name":"Русский","iso":"ru-RU"}],
+  locales: [{"code":"ru","name":"Русский","iso":"ru-RU"},{"code":"kk","name":"Қазақша","iso":"kk-KZ"}],
   defaultLocale: "ru",
   defaultDirection: "ltr",
   routesNameSeparator: "___",
@@ -31,8 +31,8 @@ export const options = {
   skipSettingLocaleOnNavigate: false,
   onBeforeLanguageSwitch: () => {},
   onLanguageSwitched: () => null,
-  normalizedLocales: [{"code":"ru","name":"Русский","iso":"ru-RU"}],
-  localeCodes: ["ru"],
+  normalizedLocales: [{"code":"ru","name":"Русский","iso":"ru-RU"},{"code":"kk","name":"Қазақша","iso":"kk-KZ"}],
+  localeCodes: ["ru","kk"],
   additionalMessages: [],
 }
 

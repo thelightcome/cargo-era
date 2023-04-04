@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Cargo</string>
+    <string name="title_activity_main">Cargo</string>
+    <string name="package_name">com.cargo.undefined</string>
+    <string name="custom_url_scheme">com.cargo.undefined</string>
+</resources>

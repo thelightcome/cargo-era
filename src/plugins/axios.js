@@ -22,7 +22,7 @@ export default function (ctx) {
     if (code) {
       ctx.$services.common.error.onError(code)
     }
-    return Promise.reject(error.response?.data || error)
+    return Promise.reject(error)
   })
 
   ctx.$axios.interceptors.request.use(function (response) {

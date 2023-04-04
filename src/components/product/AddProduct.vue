@@ -4,6 +4,7 @@
       id="code"
       v-model="code"
       :label="isUser ? 'Track Code' : 'User Code'"
+      name="code"
       icon="text"
       type="text"
       :disabled="false"

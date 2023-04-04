@@ -6,6 +6,7 @@ import scrollBehavior from './router.scrollBehavior.js'
 
 const _3c086488 = () => interopDefault(import('..\\src\\pages\\admin\\index.vue' /* webpackChunkName: "pages/admin/index" */))
 const _2d239a55 = () => interopDefault(import('..\\src\\pages\\auth\\index.vue' /* webpackChunkName: "pages/auth/index" */))
+const _52641286 = () => interopDefault(import('..\\src\\pages\\index.vue' /* webpackChunkName: "pages/index" */))
 const _7c612f5c = () => interopDefault(import('..\\src\\pages\\user\\index.vue' /* webpackChunkName: "pages/user/index" */))
 const _1eee3350 = () => interopDefault(import('..\\src\\pages\\admin\\list.vue' /* webpackChunkName: "pages/admin/list" */))
 const _43194b86 = () => interopDefault(import('..\\src\\pages\\admin\\setting.vue' /* webpackChunkName: "pages/admin/setting" */))
@@ -13,7 +14,6 @@ const _6b91d3f0 = () => interopDefault(import('..\\src\\pages\\auth\\register.vu
 const _0bc6562a = () => interopDefault(import('..\\src\\pages\\auth\\respawn.vue' /* webpackChunkName: "pages/auth/respawn" */))
 const _79657d64 = () => interopDefault(import('..\\src\\pages\\user\\list.vue' /* webpackChunkName: "pages/user/list" */))
 const _732e84d0 = () => interopDefault(import('..\\src\\pages\\user\\setting.vue' /* webpackChunkName: "pages/user/setting" */))
-const _52641286 = () => interopDefault(import('..\\src\\pages\\index.vue' /* webpackChunkName: "pages/index" */))
 
 const emptyFn = () => {}
 
@@ -35,6 +35,10 @@ export const routerOptions = {
     component: _2d239a55,
     name: "auth___ru"
   }, {
+    path: "/kk",
+    component: _52641286,
+    name: "index___kk"
+  }, {
     path: "/user",
     component: _7c612f5c,
     name: "user___ru"
@@ -55,6 +59,18 @@ export const routerOptions = {
     component: _0bc6562a,
     name: "auth-respawn___ru"
   }, {
+    path: "/kk/admin",
+    component: _3c086488,
+    name: "admin___kk"
+  }, {
+    path: "/kk/auth",
+    component: _2d239a55,
+    name: "auth___kk"
+  }, {
+    path: "/kk/user",
+    component: _7c612f5c,
+    name: "user___kk"
+  }, {
     path: "/user/list",
     component: _79657d64,
     name: "user-list___ru"
@@ -62,6 +78,30 @@ export const routerOptions = {
     path: "/user/setting",
     component: _732e84d0,
     name: "user-setting___ru"
+  }, {
+    path: "/kk/admin/list",
+    component: _1eee3350,
+    name: "admin-list___kk"
+  }, {
+    path: "/kk/admin/setting",
+    component: _43194b86,
+    name: "admin-setting___kk"
+  }, {
+    path: "/kk/auth/register",
+    component: _6b91d3f0,
+    name: "auth-register___kk"
+  }, {
+    path: "/kk/auth/respawn",
+    component: _0bc6562a,
+    name: "auth-respawn___kk"
+  }, {
+    path: "/kk/user/list",
+    component: _79657d64,
+    name: "user-list___kk"
+  }, {
+    path: "/kk/user/setting",
+    component: _732e84d0,
+    name: "user-setting___kk"
   }, {
     path: "/",
     component: _52641286,

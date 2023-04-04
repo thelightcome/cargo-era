@@ -12,10 +12,11 @@
         :id="id"
         v-model="model"
         v-mask="mask"
+        :name="name"
         :type="type"
         class="field__input"
         :disabled="disabled"
-        autocomplete="on"
+        :autocomplete="auto ? 'on' : 'off'"
         @keydown="onKeydown"
         @focus="onFocus"
         @blur="onBlur"
@@ -36,7 +37,7 @@ import IconMagniGlass from 'icons/magni-glass.svg?inline'
 import IconUser from 'icons/user.svg?inline'
 import IconPen from 'icons/pen.svg?inline'
 import IconEmail from 'icons/email.svg?inline'
-import IconTel from 'icons/tel.svg?inline'
+import IconPhoneNumber from 'icons/tel.svg?inline'
 import IconLock from 'icons/lock.svg?inline'
 
 export type TypeInput = 'text' | 'email' | 'password' | 'tel' | 'search'
@@ -46,7 +47,7 @@ export type TypeIcon =
   | 'text2'
   | 'email'
   | 'password'
-  | 'tel'
+  | 'phoneNumber'
   | 'search'
 
 export type IIcons = { [key in TypeIcon]: SVGElement }
@@ -58,7 +59,7 @@ const ICONS: IIcons = {
   text2: IconUser,
   email: IconEmail,
   password: IconLock,
-  tel: IconTel,
+  phoneNumber: IconPhoneNumber,
   search: IconMagniGlass,
 }
 
@@ -69,13 +70,21 @@ export default Vue.extend({
     IconUser,
     IconPen,
     IconEmail,
-    IconTel,
+    IconPhoneNumber,
     IconLock,
   },
   props: {
     id: {
       type: String,
       required: true,
+    },
+    name: {
+      type: String,
+      required: true,
+    },
+    auto: {
+      type: Boolean,
+      default: true,
     },
     label: {
       type: String,

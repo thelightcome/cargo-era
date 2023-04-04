@@ -57,6 +57,11 @@ export default Vue.extend({
       current: null as number | null,
     }
   },
+  watch: {
+    list() {
+      if (this.list.length === 1) this.current = 0
+    },
+  },
   methods: {
     toggle(ind: number) {
       if (this.current === ind) return (this.current = null)

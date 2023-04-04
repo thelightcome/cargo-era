@@ -4,6 +4,7 @@
       <Logo />
       <div class="header__control">
         <Menu v-if="menu.length" :menu="getMenu" class="header__menu" />
+        <UserCode class="header__user-code" />
         <SwitchLang class="header__switch-lang" />
         <Button
           v-if="isLogged"
@@ -27,6 +28,7 @@ import IconLogout from 'icons/logout.svg?inline'
 
 import SwitchLang from 'components/ui/SwitchLang.vue'
 import Logo from 'components/ui/Logo.vue'
+import UserCode from 'components/user/UserCode.vue'
 import Menu, { IMenuItem } from 'components/ui/Menu.vue'
 import Button from 'components/ui/Button.vue'
 
@@ -34,7 +36,7 @@ import { IMenu } from './common.types'
 
 export default Vue.extend({
   name: 'Header',
-  components: { IconLogout, SwitchLang, Logo, Menu, Button },
+  components: { IconLogout, SwitchLang, Logo, UserCode, Menu, Button },
   props: {
     menu: {
       type: Array as PropType<IMenu[]>,
@@ -106,6 +108,22 @@ export default Vue.extend({
 
   &__switch-lang {
     left: 0.4rem;
+  }
+
+  &__user-code {
+    position: absolute !important;
+    top: 50%;
+    transform: translateY(-50%);
+    align-self: center;
+    right: 4.5rem;
+
+    @include tablet {
+      position: relative !important;
+      top: unset;
+      transform: unset;
+      left: unset;
+      right: unset;
+    }
   }
 
   &__quit {

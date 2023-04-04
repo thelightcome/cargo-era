@@ -13,23 +13,11 @@
     </h4>
     <div class="user-data__row">
       <Input
-        id="login"
-        v-model="login"
-        label="Login"
-        :icon="edit ? 'text' : ''"
-        variant="transparent"
-        type="text"
-        :disabled="!edit"
-        :error="edit ? loginError : ''"
-        class="user-data__field"
-        @onBlur="onBlur('login')"
-      />
-    </div>
-    <div class="user-data__row">
-      <Input
         id="firstname"
         v-model="firstname"
         label="First Name"
+        name="firstname"
+        :auto="false"
         :icon="edit ? 'text2' : ''"
         variant="transparent"
         type="text"
@@ -42,9 +30,11 @@
         id="lastname"
         v-model="lastname"
         label="Last Name"
+        name="lastname"
         :icon="edit ? 'text2' : ''"
         variant="transparent"
         type="text"
+        :auto="false"
         :disabled="!edit"
         :error="edit ? lastnameError : ''"
         class="user-data__field"
@@ -56,6 +46,8 @@
         id="email"
         v-model="email"
         label="Email"
+        :auto="false"
+        name="email"
         :icon="edit ? 'email' : ''"
         variant="transparent"
         type="email"
@@ -67,17 +59,19 @@
     </div>
     <div class="user-data__row">
       <Input
-        id="tel"
-        v-model="tel"
+        id="phoneNumber"
+        v-model="phoneNumber"
         label="Phone Number"
-        :icon="edit ? 'tel' : ''"
+        name="phoneNumber"
+        :icon="edit ? 'phoneNumber' : ''"
         variant="transparent"
+        :auto="false"
         type="tel"
         :mask="'+7 (###) ###-##-##'"
         :disabled="!edit"
-        :error="edit ? telError : ''"
+        :error="edit ? phoneNumberError : ''"
         class="user-data__field"
-        @onBlur="onBlur('tel')"
+        @onBlur="onBlur('phoneNumber')"
       />
     </div>
     <div v-show="edit" class="user-data__row user-data__row--btn">
@@ -109,16 +103,14 @@ export default Vue.extend({
   data() {
     return {
       edit: false,
-      login: this.userData.login || '',
-      loginError: '',
       email: this.userData.email || '',
       emailError: '',
       firstname: this.userData.firstName || '',
       firstnameError: '',
       lastname: this.userData.lastName || '',
       lastnameError: '',
-      tel: this.userData.tel || '',
-      telError: '',
+      phoneNumber: this.userData.phoneNumber || '',
+      phoneNumberError: '',
       errors: {
         required: this.$tc('required'),
         isEmail: this.$tc('isEmail'),
@@ -133,18 +125,16 @@ export default Vue.extend({
   computed: {
     isHasError(): boolean {
       return !!(
-        this.loginError ||
         this.emailError ||
         this.firstnameError ||
         this.lastnameError ||
-        this.telError
+        this.phoneNumberError
       )
     },
     getParseData(): IUserData {
       return {
-        login: this.login,
         firstName: this.firstname,
-        tel: this.tel,
+        phoneNumber: this.phoneNumber.replace(/[^\d]/g, ''),
         lastName: this.lastname,
         email: this.email,
       }
@@ -158,21 +148,15 @@ export default Vue.extend({
       this.edit = !this.edit
     },
     setUserData() {
-      this.login = this.userData.login || ''
       this.email = this.userData.email || ''
       this.firstname = this.userData.firstName || ''
       this.lastname = this.userData.lastName || ''
-      this.tel = this.userData.tel || ''
+      this.phoneNumber = this.userData.phoneNumber || ''
     },
     onBlur(type: string) {
       this.check(type)
     },
     check(type?: string) {
-      if (!type || type === 'login')
-        this.loginError = this.$services.formValidation.getError(
-          this.$services.formValidation.text(this.login),
-          this.errors
-        )
       if (!type || type === 'email')
         this.emailError = this.$services.formValidation.getError(
           this.$services.formValidation.email(this.email),
@@ -188,27 +172,39 @@ export default Vue.extend({
           this.$services.formValidation.text(this.lastname),
           this.errors
         )
-      if (!type || type === 'tel')
-        this.telError = this.$services.formValidation.getError(
-          this.$services.formValidation.phone(this.tel),
+      if (!type || type === 'phoneNumber')
+        this.phoneNumberError = this.$services.formValidation.getError(
+          this.$services.formValidation.phone(this.phoneNumber),
           this.errors
         )
     },
     async onSubmit() {
       this.check()
       if (this.isHasError) return
-
-      await this.$repositories.user.changeData(
-        this.$services.filterObject({
-          login: this.login,
-          firstName: this.firstname,
-          lastName: this.lastname,
-          tel: this.tel,
-          email: this.email,
-        }) as IUserData
-      )
-      await this.$auth.fetchUser()
-      this.edit = false
+      try {
+        this.$nuxt.$loading.start()
+        await this.$repositories.user.changeData(
+          this.$services.filterObject({
+            firstName: this.firstname,
+            lastName: this.lastname,
+            phoneNumber: this.phoneNumber,
+            email: this.email,
+          }) as IUserData
+        )
+        await this.$auth.fetchUser()
+        this.edit = false
+        this.$store.dispatch('toast/setToast', {
+          type: 'valid',
+          message: 'User data was changed',
+        })
+      } catch (err: any) {
+        this.$store.dispatch('toast/setToast', {
+          type: 'error',
+          message: this.$tc(err.error),
+        })
+      } finally {
+        this.$nuxt.$loading.finish()
+      }
     },
   },
 })

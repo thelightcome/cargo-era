@@ -3,6 +3,7 @@
     id="search"
     v-model="search"
     label="Search"
+    name="search"
     icon="search"
     type="search"
     :disabled="false"

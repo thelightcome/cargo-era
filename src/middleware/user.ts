@@ -1,5 +1,4 @@
-import { Context } from '@nuxt/types'
-import { Middleware } from '@nuxt/types'
+import { Context, Middleware } from '@nuxt/types'
 
 const adminMiddlewar: Middleware = ({ $auth, redirect }: Context) => {
   if (!$auth.loggedIn) {

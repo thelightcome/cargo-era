@@ -1,36 +1,17 @@
 <template>
   <div class="scan-form" :class="{ 'scan-form--active': value }">
-    <Button
-      class="scan-form__btn"
-      version="primary"
-      variant="filled"
-      @click="active = !active"
-    >
+    <Button class="scan-form__btn" version="primary" variant="filled">
       <span class="scan-form__btn-inner">
         <span>{{ title }}</span>
         <component :is="getIcon" class="scan-form__icon"></component>
       </span>
     </Button>
     <ClientOnly>
-      <DynamicSoftScanner
-        v-if="active && isBarCode"
-        class="scan-form__barcode"
-        @onDecode="onDecode"
-      />
-      <!-- <ScanbotSDK @onDecode="onDecode" /> -->
-      <!-- <MozScanner /> -->
-      <!-- <ZXingCoder @onDecode="onDecode" /> -->
-      <!-- <v-quagga
-        v-if="active && isBarCode"
-        :on-detected="onDecode"
-        class="scanner"
-        :reader-types="barcodes"
-      ></v-quagga> -->
+      <Zxing v-if="isBarCode" @onDecode="onDecode" />
       <Reader
-        v-if="active && !isBarCode"
+        v-if="!isBarCode"
         class="scan-form__scanner"
         @onDecode="onDecode"
-        @click="active = false"
       />
     </ClientOnly>
     <Input
@@ -38,6 +19,7 @@
       v-model="model"
       type="text"
       :label="getTitle"
+      name="scan"
       icon="text"
       :disabled="false"
       class="scan-form__input"
@@ -55,10 +37,7 @@ import IconQrCode from 'icons/qr-code.svg?inline'
 import Input from 'components/ui/Input.vue'
 import Button from 'components/ui/Button.vue'
 import Reader from 'components/readers/Reader.vue'
-// import ZXingCoder from 'components/readers/ZXingCoder.vue'
-// import MozScanner from 'components/readers/MozScanner.vue'
-// import ScanbotSDK from 'components/readers/ScanbotSDK.vue'
-import DynamicSoftScanner from 'components/readers/DynamicSoftScanner.vue'
+import Zxing from 'components/readers/Zxing.vue'
 
 export type TYPES_SCAN = 'barcode' | 'qrcode'
 
@@ -78,10 +57,7 @@ export default Vue.extend({
     Reader,
     Input,
     Button,
-    // ZXingCoder,
-    // MozScanner,
-    // ScanbotSDK,
-    DynamicSoftScanner,
+    Zxing,
     IconBarCode,
     IconQrCode,
   },
@@ -133,9 +109,7 @@ export default Vue.extend({
   },
   methods: {
     onDecode(e: string) {
-      if (e) {
-        this.$emit('input', e)
-      }
+      this.$emit('input', e)
     },
   },
 })

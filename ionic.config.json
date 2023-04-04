@@ -1,0 +1,12 @@
+{
+  "name": "cargo",
+  "integrations": {
+    "capacitor": {
+        "appId": "com.cargo.cargo",
+        "appName": "Cargo",
+        "webDir": "./dist",
+        "bundledWebRuntime": "false"
+      }
+    },
+  "type": "custom"
+}

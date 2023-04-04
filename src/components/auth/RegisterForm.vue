@@ -1,20 +1,10 @@
 <template>
   <form class="form" @submit.prevent="">
     <Input
-      id="login"
-      v-model="login"
-      label="Login"
-      icon="text"
-      type="text"
-      :disabled="false"
-      :error="loginError"
-      class="form__field"
-      @onBlur="onBlur('login')"
-    />
-    <Input
       id="email"
       v-model="email"
       label="Email"
+      name="email"
       icon="email"
       type="email"
       :disabled="false"
@@ -26,6 +16,7 @@
       id="firstname"
       v-model="firstname"
       label="First Name"
+      name="firstname"
       icon="text2"
       type="text"
       :disabled="false"
@@ -37,6 +28,7 @@
       id="lastname"
       v-model="lastname"
       label="Last Name"
+      name="lastname"
       icon="text2"
       type="text"
       :disabled="false"
@@ -45,21 +37,23 @@
       @onBlur="onBlur('lastname')"
     />
     <Input
-      id="tel"
-      v-model="tel"
+      id="phoneNumber"
+      v-model="phoneNumber"
       label="Phone Number"
-      icon="tel"
+      name="phoneNumber"
+      icon="phoneNumber"
       type="tel"
       :mask="'+7 (###) ###-##-##'"
       :disabled="false"
-      :error="telError"
+      :error="phoneNumberError"
       class="form__field"
-      @onBlur="onBlur('tel')"
+      @onBlur="onBlur('phoneNumber')"
     />
     <Input
       id="password"
       v-model="password"
       label="Password"
+      name="password"
       icon="password"
       type="password"
       :disabled="false"
@@ -71,6 +65,7 @@
       id="confirmPassword"
       v-model="confirmPassword"
       label="Confirm Password"
+      name="confirmPassword"
       icon="password"
       type="password"
       :disabled="false"
@@ -79,7 +74,12 @@
       @onBlur="onBlur('confirmPassword')"
     />
     <div class="form__field form__field--btn">
-      <Button class="form__button" @click="onSubmit">Send</Button>
+      <Button
+        class="form__button"
+        :disabled="!isFilled || isHasError"
+        @click="onSubmit"
+        >Send</Button
+      >
     </div>
   </form>
 </template>
@@ -97,16 +97,14 @@ export default Vue.extend({
   components: { Input, Button },
   data() {
     return {
-      login: '',
-      loginError: '',
       email: '',
       emailError: '',
       firstname: '',
       firstnameError: '',
       lastname: '',
       lastnameError: '',
-      tel: '',
-      telError: '',
+      phoneNumber: '',
+      phoneNumberError: '',
       password: '',
       passwordError: '',
       confirmPassword: '',
@@ -123,22 +121,30 @@ export default Vue.extend({
     }
   },
   computed: {
+    isFilled(): boolean {
+      return !!(
+        this.email &&
+        this.firstname &&
+        this.lastname &&
+        this.phoneNumber &&
+        this.password &&
+        this.confirmPassword
+      )
+    },
     isHasError(): boolean {
       return !!(
-        this.loginError ||
         this.emailError ||
         this.firstnameError ||
         this.lastnameError ||
-        this.telError ||
+        this.phoneNumberError ||
         this.passwordError ||
         this.confirmPasswordError
       )
     },
     getParseData(): ICreateUserDto {
       return {
-        login: this.login,
         firstName: this.firstname,
-        tel: this.tel,
+        phoneNumber: this.phoneNumber.replace(/[^\d]/g, ''),
         lastName: this.lastname,
         email: this.email,
         password: this.password,
@@ -150,11 +156,6 @@ export default Vue.extend({
       this.check(type)
     },
     check(type?: string) {
-      if (!type || type === 'login')
-        this.loginError = this.$services.formValidation.getError(
-          this.$services.formValidation.text(this.login),
-          this.errors
-        )
       if (!type || type === 'email')
         this.emailError = this.$services.formValidation.getError(
           this.$services.formValidation.email(this.email),
@@ -170,9 +171,9 @@ export default Vue.extend({
           this.$services.formValidation.text(this.lastname),
           this.errors
         )
-      if (!type || type === 'tel')
-        this.telError = this.$services.formValidation.getError(
-          this.$services.formValidation.phone(this.tel),
+      if (!type || type === 'phoneNumber')
+        this.phoneNumberError = this.$services.formValidation.getError(
+          this.$services.formValidation.phone(this.phoneNumber),
           this.errors
         )
       if (!type || type === 'password')

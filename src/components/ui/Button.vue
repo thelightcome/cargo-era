@@ -176,5 +176,11 @@ export default Vue.extend({
   &--outlined {
     background: transparent;
   }
+
+  &:disabled {
+    background: $bg-disabled;
+    border-color: $bg-disabled;
+    cursor: not-allowed;
+  }
 }
 </style>

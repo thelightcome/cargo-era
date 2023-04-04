@@ -28,7 +28,7 @@
     {
       "hid": "theme-color",
       "name": "theme-color",
-      "content": "#211f1d"
+      "content": "#4C9DFB"
     },
     {
       "hid": "og:type",
@@ -57,8 +57,19 @@
   ],
   "link": [
     {
+      "hid": "shortcut-icon",
+      "rel": "shortcut icon",
+      "href": "/nuxt/icons/icon_64x64.656b15.png"
+    },
+    {
+      "hid": "apple-touch-icon",
+      "rel": "apple-touch-icon",
+      "href": "/nuxt/icons/icon_512x512.656b15.png",
+      "sizes": "512x512"
+    },
+    {
       "rel": "manifest",
-      "href": "/nuxt/manifest.d9a49e3e.json",
+      "href": "/nuxt/manifest.b198c69d.json",
       "hid": "manifest"
     }
   ],

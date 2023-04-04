@@ -1,18 +1,19 @@
 <template>
   <form class="form" @submit.prevent="">
     <Input
-      id="login"
-      v-model="login"
-      label="Login or Email"
+      id="email"
+      v-model="email"
+      label="Email"
+      name="email"
       icon="text"
-      type="text"
+      type="email"
       :disabled="false"
-      :error="loginError"
+      :error="emailError"
       class="form__field"
-      @onBlur="onBlur('login')"
+      @onBlur="onBlur('email')"
     />
-    <div v-show="login && !loginError" class="form__respawn">
-      <button class="form__respawn-btn" @click="$emit('respawn', login)">
+    <div v-show="email && !emailError" class="form__respawn">
+      <button class="form__respawn-btn" @click="$emit('respawn', email)">
         respawn
       </button>
     </div>
@@ -20,6 +21,7 @@
       id="password"
       v-model="password"
       label="Password"
+      name="password"
       icon="password"
       type="password"
       :disabled="false"
@@ -28,7 +30,13 @@
       @onBlur="onBlur('password')"
     />
     <div class="form__field form__field--btn">
-      <Button class="form__button" @click="onSubmit">Send</Button>
+      <Button
+        class="form__button"
+        :disabled="!isFilled || isHasError"
+        @click="onSubmit"
+      >
+        Send
+      </Button>
     </div>
   </form>
 </template>
@@ -46,8 +54,8 @@ export default Vue.extend({
   components: { Input, Button },
   data() {
     return {
-      login: '',
-      loginError: '',
+      email: '',
+      emailError: '',
       password: '',
       passwordError: '',
       errors: {
@@ -57,12 +65,15 @@ export default Vue.extend({
     }
   },
   computed: {
+    isFilled(): boolean {
+      return !!(this.email && this.password)
+    },
     isHasError(): boolean {
-      return !!(this.loginError || this.passwordError)
+      return !!(this.emailError || this.passwordError)
     },
     getParseData(): ILoginUserDto {
       return {
-        login: this.login,
+        email: this.email,
         password: this.password,
       }
     },
@@ -72,9 +83,9 @@ export default Vue.extend({
       this.check(type)
     },
     check(type?: string) {
-      if (!type || type === 'login')
-        this.loginError = this.$services.formValidation.getError(
-          this.$services.formValidation.text(this.login),
+      if (!type || type === 'email')
+        this.emailError = this.$services.formValidation.getError(
+          this.$services.formValidation.email(this.email),
           this.errors
         )
       if (!type || type === 'password')
@@ -94,7 +105,7 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 .form {
-  max-width: 600px;
+  max-width: 300px;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -105,10 +116,6 @@ export default Vue.extend({
 
   &__field {
     flex-grow: 1;
-
-    @include tablet {
-      max-width: 46%;
-    }
 
     &--btn {
       display: flex;
@@ -121,10 +128,6 @@ export default Vue.extend({
 
   &__button {
     width: 100%;
-
-    @include tablet {
-      max-width: 60%;
-    }
   }
 
   &__respawn {

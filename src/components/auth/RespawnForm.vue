@@ -4,6 +4,7 @@
       id="code"
       v-model="code"
       label="Code"
+      name="code"
       icon="text"
       type="text"
       :disabled="false"
@@ -15,6 +16,7 @@
       id="password"
       v-model="password"
       label="Password"
+      name="password"
       icon="password"
       type="password"
       :disabled="false"
@@ -26,6 +28,7 @@
       id="confirmPassword"
       v-model="confirmPassword"
       label="Confirm Password"
+      name="confirmPassword"
       icon="password"
       type="password"
       :disabled="false"
@@ -34,7 +37,12 @@
       @onBlur="onBlur('confirmPassword')"
     />
     <div class="form__field form__field--btn">
-      <Button class="form__button" @click="onSubmit">Send</Button>
+      <Button
+        class="form__button"
+        :disabled="!isFilled || isHasError"
+        @click="onSubmit"
+        >Send</Button
+      >
     </div>
   </form>
 </template>
@@ -66,6 +74,9 @@ export default Vue.extend({
     }
   },
   computed: {
+    isFilled(): boolean {
+      return !!(this.code && this.password && this.confirmPassword)
+    },
     isHasError(): boolean {
       return !!(
         this.codeError ||
@@ -75,10 +86,14 @@ export default Vue.extend({
     },
     getParseData(): IRespawnUserDto {
       return {
+        email: encodeURI((this.$route?.query?.email as string) || ''),
         code: this.code,
         password: this.password,
       }
     },
+  },
+  mounted() {
+    if (!this.$route.query.email) this.$router.push(this.localePath(`/auth`))
   },
   methods: {
     onBlur(type: string) {

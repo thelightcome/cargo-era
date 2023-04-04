@@ -49,7 +49,7 @@ export default class HttpClient implements IHttpClient {
     try {
       return await this.$http.$post(url, data, params)
     } catch (e) {
-      return e
+      return Promise.reject(e)
     }
   }
 

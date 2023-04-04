@@ -49,23 +49,53 @@ export default Vue.extend({
   },
   methods: {
     async trackProduct() {
-      const res = await this.$repositories.product.trackProduct(this.barcode)
-      if (!res) this.exist = false
+      try {
+        this.$nuxt.$loading.start()
+        const res = await this.$repositories.product.trackProduct(this.barcode)
+        if (!res) this.exist = false
+      } catch (err: any) {
+        this.$store.dispatch('toast/setToast', {
+          type: 'error',
+          message: this.$tc(err.error),
+        })
+      } finally {
+        this.$nuxt.$loading.finish()
+      }
     },
     async onSubmit(createProduct: ICreateProduct) {
-      const res = await this.$repositories.product.addProduct({
-        ...createProduct,
-        trackCode: this.barcode,
-      })
-      if (res) this.exist = true
+      try {
+        this.$nuxt.$loading.start()
+        const res = await this.$repositories.product.addProduct({
+          ...createProduct,
+          trackCode: this.barcode,
+        })
+        if (res) this.exist = true
+      } catch (err: any) {
+        this.$store.dispatch('toast/setToast', {
+          type: 'error',
+          message: this.$tc(err.error),
+        })
+      } finally {
+        this.$nuxt.$loading.finish()
+      }
     },
     async addProductToCard() {
-      const res = await this.$repositories.product.addProductToCard({
-        trackCode: this.barcode,
-        cardCode: this.qrcode,
-      })
+      try {
+        this.$nuxt.$loading.start()
+        const res = await this.$repositories.product.addProductToCard({
+          trackCode: this.barcode,
+          cardCode: this.qrcode,
+        })
 
-      console.log(res)
+        console.log(res)
+      } catch (err: any) {
+        this.$store.dispatch('toast/setToast', {
+          type: 'error',
+          message: this.$tc(err.error),
+        })
+      } finally {
+        this.$nuxt.$loading.finish()
+      }
     },
   },
 })

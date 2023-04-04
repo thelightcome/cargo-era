@@ -4,7 +4,6 @@
       <h1>Register</h1>
       <RegisterForm class="register-form" @onSubmit="onSubmit" />
       <NuxtLink :to="localePath('/auth')">Login</NuxtLink>
-      <div></div>
     </div>
   </div>
 </template>
@@ -21,12 +20,22 @@ export default Vue.extend({
   components: { RegisterForm },
   layout: 'auth',
   methods: {
-    onSubmit(data: ICreateUserDto) {
-      const res = this.$repositories.auth.register(data)
-      console.log(res)
-      // if (res?.status === 201) {
-      //   this.$router.push(this.localePath('/auth'))
-      // }
+    async onSubmit(data: ICreateUserDto) {
+      try {
+        this.$nuxt.$loading.start()
+        await this.$repositories.auth.register(data)
+        this.$store.dispatch('toast/setToast', {
+          type: 'valid',
+          message: 'Link for validation your email was sended to your email!',
+        })
+      } catch (err: any) {
+        this.$store.dispatch('toast/setToast', {
+          type: 'error',
+          message: this.$tc(err.error),
+        })
+      } finally {
+        this.$nuxt.$loading.finish()
+      }
     },
   },
 })

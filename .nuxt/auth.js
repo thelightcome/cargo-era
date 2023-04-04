@@ -28,7 +28,7 @@ export default function (ctx, inject) {
     "prefix": "auth.",
     "options": {
       "path": "/",
-      "secure": true,
+      "secure": false,
       "sameSite": "lax"
     }
   },

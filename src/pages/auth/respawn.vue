@@ -20,9 +20,23 @@ export default Vue.extend({
   components: { RespawnForm },
   layout: 'auth',
   methods: {
-    onSubmit(data: IRespawnUserDto) {
-      const res = this.$repositories.auth.respawn(data)
-      console.log(data, res)
+    async onSubmit(data: IRespawnUserDto) {
+      try {
+        this.$nuxt.$loading.start()
+        await this.$repositories.auth.respawn(data)
+        this.$router.push(this.localePath(`/auth`))
+        this.$store.dispatch('toast/setToast', {
+          type: 'valid',
+          message: 'Email was activated',
+        })
+      } catch (err: any) {
+        this.$store.dispatch('toast/setToast', {
+          type: 'error',
+          message: this.$tc(err.error),
+        })
+      } finally {
+        this.$nuxt.$loading.finish()
+      }
     },
   },
 })

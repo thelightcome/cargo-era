@@ -6,6 +6,7 @@
     <label class="textarea__body">
       <textarea
         :id="id"
+        ref="textarea"
         v-model="model"
         class="textarea__input"
         :disabled="disabled"
@@ -60,9 +61,13 @@ export default Vue.extend({
       },
     },
   },
+  mounted() {
+    this.resize()
+  },
   methods: {
     onKeydown(e: KeyboardEvent) {
       this.$emit('onKeydown', e)
+      this.resize()
     },
     onFocus(e: FocusEvent) {
       this.focus = true
@@ -71,6 +76,11 @@ export default Vue.extend({
     onBlur(e: FocusEvent) {
       this.focus = false
       this.$emit('onBlur', e)
+    },
+    resize() {
+      const textarea = this.$refs.textarea as HTMLTextAreaElement
+      if (textarea.scrollHeight > textarea.clientHeight)
+        textarea.style.height = textarea.scrollHeight - 4 + 'px'
     },
   },
 })
