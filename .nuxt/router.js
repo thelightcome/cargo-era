@@ -20,7 +20,7 @@ const emptyFn = () => {}
 Vue.use(Router)
 
 export const routerOptions = {
-  mode: 'history',
+  mode: 'hash',
   base: '/',
   linkActiveClass: 'nuxt-link-active',
   linkExactActiveClass: 'nuxt-link-exact-active',

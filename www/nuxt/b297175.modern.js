@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[9],{553:function(p,a,e){"use strict";e.r(a);var t=function(){var n=this,d=n._self._c,f=n._self._setupProxy;return d("main")},s=[],o=e(0),l=e.n(o),u=l.a.extend({name:"Home",middleware(r){var{redirect:n}=r;return n(302,"/auth")}}),v=u,c=e(3),m=Object(c.a)(v,t,s,!1,null,null,null),i=a.default=m.exports}}]);

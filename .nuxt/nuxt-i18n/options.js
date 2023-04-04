@@ -6,7 +6,7 @@ export const Constants = {
   REDIRECT_ON_OPTIONS: {"ALL":"all","ROOT":"root","NO_PREFIX":"no prefix"},
 }
 export const nuxtOptions = {
-  isUniversalMode: true,
+  isUniversalMode: false,
   trailingSlash: undefined,
 }
 export const options = {

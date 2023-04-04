@@ -65,7 +65,7 @@ Object.defineProperty(Vue.prototype, '$nuxt', {
 
 Vue.use(Meta, {"keyName":"head","attribute":"data-n-head","ssrAttribute":"data-n-head-ssr","tagIDKeyName":"hid"})
 
-const defaultTransition = {"name":"page","mode":"out-in","appear":false,"appearClass":"appear","appearActiveClass":"appear-active","appearToClass":"appear-to"}
+const defaultTransition = {"name":"page","mode":"out-in","appear":true,"appearClass":"appear","appearActiveClass":"appear-active","appearToClass":"appear-to"}
 
 const originalRegisterModule = Vuex.Store.prototype.registerModule
 
@@ -85,15 +85,12 @@ async function createApp(ssrContext, config = {}) {
   // Add this.$router into store actions/mutations
   store.$router = router
 
-  // Fix SSR caveat https://github.com/nuxt/nuxt.js/issues/3757#issuecomment-414689141
-  store.registerModule = registerModule
-
   // Create Root instance
 
   // here we inject the router and store to all child components,
   // making them available everywhere as `this.$router` and `this.$store`.
   const app = {
-    head: {"title":"Cargo","meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1 maximum-scale=1.0, user-scalable=no"},{"hid":"description","name":"description","content":""},{"name":"msapplication-TileColor","content":"#363433"},{"name":"theme-color","content":"#ffffff"}],"link":[{"rel":"icon","type":"image\u002Fx-icon","href":"\u002Ffavicon\u002Ffavicon.ico"}],"style":[],"script":[]},
+    head: {"title":"Cargo","meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1 maximum-scale=1.0, user-scalable=no"},{"hid":"description","name":"description","content":""},{"name":"msapplication-TileColor","content":"#363433"},{"name":"theme-color","content":"#ffffff"},{"hid":"charset","charset":"utf-8"},{"hid":"mobile-web-app-capable","name":"mobile-web-app-capable","content":"yes"},{"hid":"apple-mobile-web-app-title","name":"apple-mobile-web-app-title","content":"Cargo"},{"hid":"og:type","name":"og:type","property":"og:type","content":"website"},{"hid":"og:title","name":"og:title","property":"og:title","content":"Cargo"},{"hid":"og:site_name","name":"og:site_name","property":"og:site_name","content":"Cargo"},{"hid":"og:description","name":"og:description","property":"og:description","content":"Cargo"}],"link":[{"rel":"icon","type":"image\u002Fx-icon","href":"\u002Ffavicon\u002Ffavicon.ico"},{"hid":"shortcut-icon","rel":"shortcut icon","href":"\u002Fnuxt\u002Ficons\u002Ficon_64x64.656b15.png"},{"hid":"apple-touch-icon","rel":"apple-touch-icon","href":"\u002Fnuxt\u002Ficons\u002Ficon_512x512.656b15.png","sizes":"512x512"},{"rel":"manifest","href":"\u002Fnuxt\u002Fmanifest.b198c69d.json","hid":"manifest"}],"style":[],"script":[],"htmlAttrs":{"lang":"ru"}},
 
     store,
     router,

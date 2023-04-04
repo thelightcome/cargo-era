@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[5],{633:function(e,n,t){"use strict";t.r(n);var l=t(0),o=t.n(l).a.extend({name:"PageAdminSetting",layout:"admin"}),c=t(8),component=Object(c.a)(o,(function(){var e=this._self._c;this._self._setupProxy;return e("div",{staticClass:"page"})}),[],!1,null,"eabfd584",null);n.default=component.exports}}]);
